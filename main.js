@@ -11,7 +11,7 @@ dotenv.config({
 	path: path.join(__dirname, ".env"),
 })
 
-const socket = io()
+const socket = io(process.env.PORT)
 
 async function run() {
 	const connection = await amqp.connect(process.env.amqp)
