@@ -1,6 +1,6 @@
 {
 	"namespaces": {
-		"bans": [ "banCreate", "banDelete" ],
+		"actions": [ "actionCreate", "actionDelete" ],
 		"reports": [ "reportCreate", "reportDelete" ]
 	}
 }
