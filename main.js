@@ -18,7 +18,11 @@ const socket = io(server)
 
 const namespaces = lodash.mapValues(config.namespaces, (_, name) => socket.of(name))
 
-const client = redis.createClient(process.env.REDIS)
+const client = redis.createClient({
+	host: process.env.REDIS_HOST,
+	password: process.env.REDIS_PASSWORD,
+})
+
 client.on("message", (channel, message) => {
 	const namespace = namespaces[lodash.findKey(events => events.includes(channel))]
 	namespace.emit(channel, JSON.parse(message))
