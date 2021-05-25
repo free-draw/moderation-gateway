@@ -20,9 +20,9 @@ jobs:
         run: doctl registry login --expiry-seconds 1000
       
       - name: Build
-        run: docker build -t moderation-gateway .
+        run: docker build -t moderation-socket .
       
       - name: Upload
         run: |
-          docker tag moderation-gateway registry.digitalocean.com/free-draw/moderation-gateway:latest
-          docker push registry.digitalocean.com/free-draw/moderation-gateway:latest
+          docker tag moderation-socket registry.digitalocean.com/free-draw/moderation-socket:latest
+          docker push registry.digitalocean.com/free-draw/moderation-socket:latest
