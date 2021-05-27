@@ -26,7 +26,7 @@ const client = redis.createClient({
 })
 
 client.on("message", (channel, message) => {
-	const namespace = namespaces[lodash.findKey(events => events.includes(channel))]
+	const namespace = namespaces[lodash.findKey(config.namespaces, events => events.includes(channel))]
 	namespace.emit(channel, JSON.parse(message))
 })
 Object.values(config.namespaces).flat().map(event => client.subscribe(event))
