@@ -4,7 +4,7 @@ const http = require("http")
 const path = require("path")
 const lodash = require("lodash")
 const io = require("socket.io")
-const redis = require("redis")
+const Redis = require("ioredis")
 
 const config = require("./config.json")
 
@@ -20,10 +20,7 @@ const socket = io(server)
 
 const namespaces = lodash.mapValues(config.namespaces, (_, name) => socket.of(name))
 
-const client = redis.createClient({
-	host: process.env.REDIS_HOST,
-	password: process.env.REDIS_PASSWORD,
-})
+const client = new Redis(process.env.REDIS)
 
 client.on("message", (channel, message) => {
 	const namespace = namespaces[lodash.findKey(config.namespaces, events => events.includes(channel))]
